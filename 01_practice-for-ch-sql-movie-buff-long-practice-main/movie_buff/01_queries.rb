@@ -1,12 +1,13 @@
 def it_was_ok
   # Consider the following:
+
   #
   # Movie.where(yr: 1970..1979)
   #
   # You can use ranges (a..b) inside a where method.
   #
   # Find the id, title, and score of all movies with scores between 2 and 3.
-
+    Movie.where(score: 2.0..3.0).select(:id , :title, :score)
 end
 
 def harrison_ford
@@ -17,9 +18,14 @@ def harrison_ford
   #   .where(movies: { title: 'Blade Runner' })
   #
   # It's possible to join based on Active Record associations defined in models.
+
   #
   # Find the id and title of all movies in which Harrison Ford appeared but not
   # as a lead actor.
+  Actor.joins(:movie)
+  # Actor.find_by(name: "Harrison Ford").
+
+
 
 end
 
@@ -37,7 +43,7 @@ def biggest_cast
   #
   # Find the id and title of the 3 movies with the largest casts (i.e., most
   # actors).
-  
+
 end
 
 def directed_by_one_of(them)
@@ -52,7 +58,7 @@ def directed_by_one_of(them)
   # Movie.where(yr: years)
   #
   # Find the id and title of all the movies directed by one of 'them'.
-  
+
   # Note: Directors appear in the 'actors' table.
 
 end
