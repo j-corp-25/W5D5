@@ -14,3 +14,8 @@ acceprs coliumns names as arguymebnts
 
 ## Demo
 
+
+
+## N + 1 Queries
+
+
