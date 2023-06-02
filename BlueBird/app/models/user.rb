@@ -24,29 +24,35 @@ class User < ApplicationRecord
     foreign_key: :liker_id,
     class_name: :Like,
     dependent: :destroy
-  
+
   has_many :liked_chirps,
     through: :likes,
     source: :chirp
 
-  
+
   # DEMO 1: Finder methods
 
   #Get first user record, use first
+  User.first
 
   #Get last user record, use last
-
+  User.last
   #Find a user that exists by id, use find
-
+  User.find(10)
   #Find a user that doesn't exist by id, use find
-
+  User.find(100)
   #Find a user by username, use find_by
-  
+  User.find_by(username: "awesome_person")
+  User.find_by("username = 'awesome_person'")
+  User.find_by("username = (?)", "awesome_person'")
+  User.find_by("username = :username", username: "awesome_person'")
+
   #Find a user by username that does not exist, use find_by
 
 
 
   # DEMO 2: Interactive, Queries with Conditions
+  
 
   #Find all users between the ages of 10 and 20 inclusive. Show their username, and political affiliation.
 
