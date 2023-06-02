@@ -36,7 +36,8 @@ class Chirp < ApplicationRecord
   # DEMO 3: Using Associations and Joins
 
   #Find all chirps for a particular user (username: "catz")
-  Chirp.joins(:author)
+  Chirp.joins(:author).where(:users {username: "catz"})
+  Chirp.joins(:author).where(:users {"users.username = 'catz"})
 
   #Find all chirps liked by people politically affiliated with JavaScript
 
