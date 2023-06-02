@@ -16,7 +16,7 @@ class Chirp < ApplicationRecord
 
   def body_too_long
     if body && body.length > 140
-      self.errors.add(:body, "Too long")  
+      self.errors.add(:body, "Too long")
     end
   end
 
@@ -24,7 +24,7 @@ class Chirp < ApplicationRecord
     primary_key: :id,
     foreign_key: :author_id,
     class_name: :User
-  
+
   has_many :likes,
     dependent: :destroy
 
@@ -36,6 +36,7 @@ class Chirp < ApplicationRecord
   # DEMO 3: Using Associations and Joins
 
   #Find all chirps for a particular user (username: "catz")
+  Chirp.joins(:author)
 
   #Find all chirps liked by people politically affiliated with JavaScript
 
@@ -67,8 +68,8 @@ class Chirp < ApplicationRecord
   #     # pre-fetches data
   #     chirps = Chirp.includes(:author).all
 
-  #     chirps.each do |chirp| 
-  #     # uses pre-fetched data 
+  #     chirps.each do |chirp|
+  #     # uses pre-fetched data
   #         puts chirp.author.username
   #     end
   # end
@@ -88,7 +89,7 @@ class Chirp < ApplicationRecord
   #         .select("chirps.*, COUNT(*) AS num_likes")
   #         .joins(:likes)
   #         .group(:id)
-  
+
   #     chirps_with_likes.each do |chirp|
   #         puts chirp.num_likes
   #     end

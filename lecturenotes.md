@@ -11,3 +11,6 @@ must be end of the query
 cannot be chained withh any furtber scopes
 
 acceprs coliumns names as arguymebnts
+
+## Demo
+
