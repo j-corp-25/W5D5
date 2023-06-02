@@ -36,18 +36,26 @@ class Chirp < ApplicationRecord
   # DEMO 3: Using Associations and Joins
 
   #Find all chirps for a particular user (username: "catz")
-  Chirp.joins(:author).where(:users {username: "catz"})
-  Chirp.joins(:author).where(:users {"users.username = 'catz"})
+  #!!! What is the efficient query that uses two at the same time and not one?
+  # User.find_by(username: "catz").chirps
+  # Chirp.joins(:author).where(:users {username: "catz"})
+  # Chirp.joins(:author).where(:users {"users.username = 'catz"})
 
-  #Find all chirps liked by people politically affiliated with JavaScript
+  # #Find all chirps liked by people politically affiliated with JavaScript
+  # Chirp.joins(:likers).where(users: { political_affiliation: "JavaScript"}).distinct
 
-  #Get only the unique values from the previous query
 
-  #Find all chirps with no likes
+  # #Get only the unique values from the previous query
+  # #!!! how do you know to use outer join? What are the key words?
+  # Chirp.left_outer_joins(:likes).where(likes: { chirp_id: nil})
 
-  #Find how many likes each chirp has
+  # #Find all chirps with no likes
+  # Chirp.joins(:likes).group(:id).select(:id, "COUNT(*) AS num_likes")
 
-  #Find chirps with at least 3 likes (then, try using pluck)
+  # #Find how many likes each chirp has
+
+  # #Find chirps with at least 3 likes (then, try using pluck)
+  # Chirp.joins(:likes).group(:id).select(:id, "COUNT(*) AS num_likes").having("COUNT")
 
 
   # DEMO 4: N+1 Queries
