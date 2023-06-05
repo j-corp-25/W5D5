@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: actors
+#
+#  id          :integer      not null, primary key
+#  name        :string
+#
+# Table name: movies
+#
+#  id          :integer      not null, primary key
+#  title       :string
+#  yr          :integer
+#  score       :float
+#  votes       :integer
+#  director_id :integer
+#
+# Table name: castings
+#
+#  movie_id    :integer      not null, primary key
+#  actor_id    :integer      not null, primary key
+#  ord         :integer
+
+
 def it_was_ok
   # Consider the following:
 
@@ -22,10 +45,14 @@ def harrison_ford
   #
   # Find the id and title of all movies in which Harrison Ford appeared but not
   # as a lead actor.
-  Actor.joins(:movie)
+
   # Actor.find_by(name: "Harrison Ford").
 
-
+  Movie
+    .joins(:actors)
+    .where(actors: { name: "Harrison Ford" })
+    .where.not(castings: { ord: 1 })
+    .select(:id, :title)
 
 end
 
@@ -44,6 +71,14 @@ def biggest_cast
   # Find the id and title of the 3 movies with the largest casts (i.e., most
   # actors).
 
+
+  Movie
+    .joins(:actors)
+    .group("movies.id")
+    .order("COUNT(actors.id) DESC")
+    .limit(3)
+    .select("movies.id, movies.title")
+
 end
 
 def directed_by_one_of(them)
@@ -60,6 +95,7 @@ def directed_by_one_of(them)
   # Find the id and title of all the movies directed by one of 'them'.
 
   # Note: Directors appear in the 'actors' table.
+
 
 end
 
